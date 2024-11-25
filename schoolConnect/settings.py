@@ -96,16 +96,17 @@ WSGI_APPLICATION = 'schoolConnect.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'schoolConnect',
-        'USER': 'postgres',
-        'PASSWORD':'Holly#040115',
-        'HOST':'localhost',
-        'POST': '5432',
-    }
-}
+DATABASES = {"default": dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")}  # Loads connection string from DATABASE_URL
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'schoolConnect',
+#         'USER': 'postgres',
+#         'PASSWORD':'Holly#040115',
+#         'HOST':'localhost',
+#         'POST': '5432',
+#     }
+# }
 
 
 
