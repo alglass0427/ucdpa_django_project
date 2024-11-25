@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User   ###PREDIFINED Django USER Model
 ## Extend The User Model withProfile
 import uuid
-
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 
 
 class Profile(models.Model):
@@ -13,7 +14,9 @@ class Profile(models.Model):
     email = models.EmailField(max_length=200 , null=True,blank=True)
     short_intro = models.TextField(null=True,blank=True)
     bio  = models.TextField(null=True,blank=True)
+
     profile_image = models.ImageField(null=True,blank=True, upload_to='profiles/', default='profiles/user_default.png')
+    
     social_github = models.CharField(max_length=200,null=True,blank=True)
     social_x = models.CharField(max_length=200 , null=True,blank=True)
     social_linkdin = models.CharField(max_length=200 , null=True,blank=True)

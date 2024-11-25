@@ -2,6 +2,11 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Profile , Skill , Message
+from django.core.exceptions import ValidationError
+from django import forms
+
+ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif']
+MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -21,7 +26,8 @@ class CustomUserCreationForm(UserCreationForm):
             field.widget.attrs.update({'class':'input'})
 
 
-class ProfileForm(ModelForm):
+class ProfileForm(ModelForm,forms.Form):
+    # file = forms.FileField()
     class Meta:
         model  = Profile
         # fields = '__all__'
@@ -34,7 +40,22 @@ class ProfileForm(ModelForm):
         super(ProfileForm,self).__init__(*args,**kwargs)
         for name,field in self.fields.items():
             field.widget.attrs.update({'class':'input'})
-            
+
+
+########################ADDED FOR FILE UPLOADS
+    # def clean_file(self):
+    #     uploaded_file = self.cleaned_data['file']
+
+    #     if uploaded_file.content_type not in ALLOWED_IMAGE_TYPES:
+    #         raise ValidationError('Invalid file type. Only image files are allowed.')
+
+    #     if uploaded_file.size > MAX_FILE_SIZE:
+    #         raise ValidationError(f'File size exceeds {MAX_FILE_SIZE // (1024 * 1024)} MB.')
+
+    #     return uploaded_file
+
+
+
             
 class SkillForm(ModelForm):
     class Meta:
