@@ -27,8 +27,10 @@ SECRET_KEY = 'django-insecure-&i85h%07%%v_h!g%7f%e7jz(@_e7a_y4z2lu0n+e8io3hbzo!8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','mywebsite.com']
+#RENDER
+# ALLOWED_HOSTS = ['localhost','127.0.0.1','mywebsite.com']
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.environ.get('RENDER_HOSTNAME', '')]
 
 # Application definition
 
@@ -238,6 +240,7 @@ STATICFILES_DIRS = [
 
 #tells Django where To store the stic files from server
 ###RUN COMMANd  - - -  python manage.py collectstatic
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_ROOT =  BASE_DIR / 'static/images'

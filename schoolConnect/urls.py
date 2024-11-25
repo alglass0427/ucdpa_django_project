@@ -28,6 +28,8 @@ from django.contrib.auth import views as auth_views
 def homePage(request):
     return HttpResponse('Home Page!!')
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('projects/', include('projects.urls')),   #     add user urlpatterns
