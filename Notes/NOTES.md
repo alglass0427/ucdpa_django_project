@@ -347,3 +347,5 @@ DJANGO Docs  -  https://pypi.org/project/django-cors-headers/
  FOR JS  - in Dev Tools  -  Local Storage can be accessed localstorage.getitem() for ket value pairs
 
  ![alt text](LOCAL_STORAGE.png)
+
+ https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react

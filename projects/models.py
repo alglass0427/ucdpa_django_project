@@ -18,7 +18,11 @@ class Project(models.Model):
         )
     title = models.CharField(max_length=200)
     description =  models.TextField(null=True, blank=True) ##blank tells django wether to Allow blank on the formas for this filed
-    featured_image =  models.ImageField(null=True, blank=True, default="default.jpg")
+    featured_image =  models.ImageField(null=True, blank=True, 
+                                        default="https://res.cloudinary.com/dw32qih2n/image/upload/v1733065323/default_da6aid.jpg"
+                                        # default="default.jpg"
+                                        
+                                        )
     demo_link = models.CharField(max_length=2000,null=True,blank=True)
     source_link = models.CharField(max_length=2000,null=True,blank=True)
     tags = models.ManyToManyField(Tag,blank=True)  ##'' around the tag referenece is required because the Tag model is below in The .py file
@@ -38,8 +42,11 @@ class Project(models.Model):
     def imageURL(self):
         try:
             url = self.featured_image.url
+            # url = "https://res.cloudinary.com/dw32qih2n/image/upload/v1733065323/default_da6aid.jpg"
         except:
-            url=''
+            # url='project_default.jpg'
+            # url = 'https://res.cloudinary.com/dw32qih2n/image/upload/v1733065323/default_da6aid.jpg'
+            url = ''
         return url
     
     @property

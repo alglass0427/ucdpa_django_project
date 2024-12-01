@@ -14,20 +14,52 @@ from datetime import timedelta
 from pathlib import Path
 import os
 import dj_database_url
+import cloudinary_storage 
+import environ
+env = environ.Env()
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))  # Loads the `.env` file
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&i85h%07%%v_h!g%7f%e7jz(@_e7a_y4z2lu0n+e8io3hbzo!8'
+# SECRET_KEY = 'django-insecure-&i85h%07%%v_h!g%7f%e7jz(@_e7a_y4z2lu0n+e8io3hbzo!8'
 
+SECRET_KEY = env('SECRET_KEY')
+# SECRET_KEY = os.environ.get('API_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = os.environ.get('DEBUG') == 'TRUE'
+DEBUG = False
+# DEBUG = os.environ.get('DEBUG') == 'TRUE'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'error.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
+
+
+
+# DEBUG = env.bool('DEBUG', default=False)
 
 #RENDER
 # ALLOWED_HOSTS = ['localhost','127.0.0.1','mywebsite.com']
@@ -47,8 +79,11 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'rest_framework',
     'corsheaders',
+    'cloudinary',
+    'cloudinary_storage',
 ]
-
+# https://res.cloudinary.com/dw32qih2n/image/upload/v1733046037/samples/logo.png
+# https://res.cloudinary.com/dw32qih2n/image/upload/v1733048349/images/profiles/iron_man_pthgql.jpg
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  ###CORS
     'django.middleware.security.SecurityMiddleware',
@@ -95,8 +130,15 @@ WSGI_APPLICATION = 'schoolConnect.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+###RENDER
+# DATABASES = {"default": dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")}  # Loads connection string from DATABASE_URL
 
-DATABASES = {"default": dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")}  # Loads connection string from DATABASE_URL
+
+###ENV
+DATABASES = {
+    'default': env.db()  # Assumes DATABASE_URL is set in the `.env`
+}
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -253,3 +295,26 @@ MEDIA_URL =  '/images/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# CLOUDINARY_STORAGE = {
+
+#     'CLOUD_NAME' : 'dw32qih2n',
+#     'API_KEY': '426794781113865',
+#     'API_SECRET': 'L1Wg6HqYJ_u0RWiGYCSAmvbPR-4'
+
+# }
+# os.environ.get('DEBUG')
+
+
+CLOUDINARY_STORAGE = {
+
+    'CLOUD_NAME' : os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('API_KEY'),
+    'API_SECRET': os.environ.get('API_SECRET'),
+
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# if os.getcwd() == ''

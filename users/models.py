@@ -2,8 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User   ###PREDIFINED Django USER Model
 ## Extend The User Model withProfile
 import uuid
+import os
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from pathlib import Path
+from django.conf import settings
 
 
 class Profile(models.Model):
@@ -15,7 +18,11 @@ class Profile(models.Model):
     short_intro = models.TextField(null=True,blank=True)
     bio  = models.TextField(null=True,blank=True)
 
-    profile_image = models.ImageField(null=True,blank=True, upload_to='profiles/', default='profiles/user_default.png')
+    profile_image = models.ImageField(null=True,blank=True, upload_to='profiles/', 
+                                    #   default=f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/image/upload/v12345678/profiles/user_default.png"
+                                      default="https://res.cloudinary.com/dw32qih2n/image/upload/v1733050419/user_default_jgcypw.png"
+                                           
+                                      )
     
     social_github = models.CharField(max_length=200,null=True,blank=True)
     social_x = models.CharField(max_length=200 , null=True,blank=True)
@@ -33,12 +40,25 @@ class Profile(models.Model):
 
     @property
     def imageURL(self):
+        BASE_DIR = Path(__file__).resolve().parent.parent
+        os.path.join(BASE_DIR, 'templates')
         try:
             url = self.profile_image.url
+            # url= "https://res.cloudinary.com/dw32qih2n/image/upload/v1733050419/user_default_jgcypw.png"
+            
         except:
-            url=''
+            # url= settings.MEDIA_URL + 'profiles/user_default.png'
+            # print (settings.MEDIA_ROOT,'profiles/user_default.png')
+            url= "https://res.cloudinary.com/dw32qih2n/image/upload/v1733050419/user_default_jgcypw.png"
+
+            # url= 'https://res.cloudinary.com/dw32qih2n/image/upload/v1733048687/user_default_xdrj9k.png'
+                    # https://res.cloudinary.com/dw32qih2n/image/upload/v1733048687/user_default_xdrj9k.png
+                    # https://res.cloudinary.com/dw32qih2n/image/upload/v1733048349/images/profiles/iron_man_pthgql.jpg
+                    
+                    
         return url
     
+
 class Skill(models.Model):
     owner = models.ForeignKey(Profile,on_delete = models.CASCADE, null = True, blank=True)
     name = models.CharField(max_length=200 , null=True,blank=True)

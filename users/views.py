@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm ,  ProfileForm ,  SkillForm ,  MessageForm
 from django.db.models import Q
 from .utils import searchProfiles , paginateProfiles
+import os
 # Create your views here.
 
 
@@ -69,6 +70,7 @@ def logoutUser(request):
 
 
 def profiles(request):
+    print(os.getcwd())
     search_query = ''
     profiles, search_query = searchProfiles(request)
     custom_range, profiles = paginateProfiles(request, profiles, 3)
