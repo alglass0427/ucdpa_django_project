@@ -34,8 +34,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))  # Loads the `.env` file
 SECRET_KEY = env('SECRET_KEY')
 # SECRET_KEY = os.environ.get('API_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = os.environ.get('DEBUG') == 'TRUE'
+# DEBUG = False
+DEBUG = os.environ.get('DEBUG') == 'TRUE'
 
 
 LOGGING = {
