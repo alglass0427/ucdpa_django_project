@@ -49,7 +49,9 @@ class Profile(models.Model):
         except:
             # url= settings.MEDIA_URL + 'profiles/user_default.png'
             # print (settings.MEDIA_ROOT,'profiles/user_default.png')
-            url= "https://res.cloudinary.com/dw32qih2n/image/upload/v1733050419/user_default_jgcypw.png"
+            # url= "https://res.cloudinary.com/dw32qih2n/image/upload/v1733050419/user_default_jgcypw.png"
+            url = ''
+            # url = f"/default/{os.path.basename(default_path)}"
 
             # url= 'https://res.cloudinary.com/dw32qih2n/image/upload/v1733048687/user_default_xdrj9k.png'
                     # https://res.cloudinary.com/dw32qih2n/image/upload/v1733048687/user_default_xdrj9k.png
