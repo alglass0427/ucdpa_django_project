@@ -35,9 +35,19 @@ def searchProjects(request):
     search_query = ''
     if request.GET.get('search_query'): #search_query is the "name =" on the form
         search_query = request.GET.get('search_query')
+    
+    print("SEARCH : ",search_query )
+
+    if not search_query:
+        print("No search query provided. Returning all PROJECTS.")
+        projects = Project.objects.all()  # Or return [] if you want to show no results
+        return projects , search_query
+    
+
 
     tags = Tag.objects.filter(name__icontains = search_query)
-
+    if not tags.exists():
+        print("No tags found matching the search query.")
 
 
     projects = Project.objects.distinct().filter(

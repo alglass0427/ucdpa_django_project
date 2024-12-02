@@ -10,6 +10,12 @@ def searchProfiles(request):
 
     print("SEARCH : ",search_query )
 
+    if not search_query:
+        print("No search query provided. Returning all profiles.")
+        print("SEARCH : ",search_query )
+        profiles = Profile.objects.all()  # Or return [] if you want to show no results
+        return profiles, search_query
+
     skills = Skill.objects.filter(name__icontains = search_query)
     
     profiles = Profile.objects.distinct().filter(
