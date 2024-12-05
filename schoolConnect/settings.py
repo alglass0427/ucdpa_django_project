@@ -291,6 +291,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_ROOT =  BASE_DIR / 'static/images'
 MEDIA_URL =  '/images/'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -319,3 +322,9 @@ CLOUDINARY_STORAGE = {
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # if os.getcwd() == ''
+
+
+import os
+
+if 'RENDER' in os.environ:  # Check if running on Render
+    os.environ.setdefault('PORT', str(os.environ.get('PORT', '8000')))

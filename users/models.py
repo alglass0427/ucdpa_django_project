@@ -8,6 +8,8 @@ from django.dispatch import receiver
 from pathlib import Path
 from django.conf import settings
 
+from cloudinary_storage.storage import MediaCloudinaryStorage
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True,blank=True) # One User has One Profile
@@ -18,7 +20,7 @@ class Profile(models.Model):
     short_intro = models.TextField(null=True,blank=True)
     bio  = models.TextField(null=True,blank=True)
 
-    profile_image = models.ImageField(null=True,blank=True, upload_to='profiles/', 
+    profile_image = models.ImageField(null=True,blank=True, upload_to='profiles/', #storage=MediaCloudinaryStorage(),
                                     #   default=f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/image/upload/v12345678/profiles/user_default.png"
                                       default="https://res.cloudinary.com/dw32qih2n/image/upload/v1733050419/user_default_jgcypw.png"
                                            

@@ -80,7 +80,7 @@ def profiles(request):
 
     
     context = {'profiles':profiles , 'search_query':search_query, 'custom_range': custom_range}
-
+    print ('END OF VIEW')
     return render(request, 'users/profiles.html', context)
 
 def userProfile(request,pk):
