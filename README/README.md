@@ -1,5 +1,9 @@
 # ucdpa_django_project
 
+https://ucdpa-django-project.onrender.com/
+
+App to use API with authentication  - https://github.com/alglass0427/ucd_django_frontend_api
+
 ## School Project Display Application with PostgreSQL
 
 An application built using the Django Framework in Python for Students to create an Account / Display Projects and recieve feedback / reviews
@@ -87,105 +91,9 @@ You may need to initialize some data or perform migrations (if applicable). If n
 
     python manage.py runserver
 
-# Sample App Features
+# App Features
 ## LOGIN
 
 ![Login Screen](image.png)
 
-### User Model
-    from django.contrib.auth.models import User
-
-### Signals to Create Profile on Creation of User
-    from django.db.models.signals import post_save, post_delete
-    from django.dispatch import receiver
-
-    def createProfile(sender,instance,created, **kwargs):   ### create only exists if the Object is created in that instance
-    print('Create Profile Signal triggered  . . . ')
-    if created:                 # User is the Sender  - this checks if the User is created
-        user = instance         #  
-        profile = Profile.objects.create(
-            user=user,
-            username = user.username,
-            email = user.email,
-            name = user.first_name
-        )
-### Send Mail on user creation
-
-    from django.core.mail import send_mail
-
-        subject = 'Welcome to the Website'
-        message = "Glad you joined -  Hope you enjoy"
-
-        '''Variables from settings.py for email host etc'''    
-        send_mail(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            [profile.email],
-            fail_silently=False,
-
-        )
-### Features Reset Password
-
-    from django.contrib.auth import views as auth_views
-    urlpatterns += [
-    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="reset_password.html"),name ='reset_password'),  ##,name ='reset_password'   <<---DEFAULT
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="reset_password_sent.html"),name ='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="reset.html"),name ='password_reset_confirm'), ## encode user id in base 64 
-    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="reset_password_complete.html"),name ='password_reset_complete') 
-    ]
-
-## Profiles
-### Search
-    Search Functions to use filter with __icontains
-
-    skills = Skill.objects.filter(name__icontains = search_query)
-    
-    profiles = Profile.objects.distinct().filter(
-        Q(name__icontains = search_query)| ##__icontains is is not case sensitive -->> BEFORE THE __icontains the filed vlaue from the table is entered  -  in this case "name"
-        Q(short_intro__icontains = search_query)|
-        Q(bio__icontains = search_query)|
-        Q(skill__in=skills)
-
-    from django.db.models import Q
-
-    ![Search](image-1.png)
-
-### Pagination
-    from django.core.paginator import Paginator , PageNotAnInteger, EmptyPage
-
-## Projects
-
-    consistant theme with Profiles -  display Projects With Search And Pgination
-
-    ![Projects](image-2.png)
-
-    Links To click to each Project
-
-### Reviews 
-
-    Leave Reviews for Each Project with ability to give feedback votes and Show the user that commented
-
-    ![Reviews](image-4.png)
-
-## Send Meassges
-
-    Send Meassages to other users
-
-## Admin
-
-    ![Admin](image-5.png)
-
-## API
-
-    Exposed REST API to Fetch Project Details
-    Allows POST And PUT methods where user is authenticated.
-
-        from rest_framework.decorators import api_view , permission_classes
-        from rest_framework.response import Response
-        from rest_framework.permissions import IsAuthenticated ,
-
-    ![API](image-6.png)
-
-    ![API Token](image-7.png)
-
+Forget Password - 
