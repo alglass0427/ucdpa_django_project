@@ -55,9 +55,9 @@ makefile
 
     DEBUG='FALSE'
     DATABASE_URL='postgresql://alwglass:wa050J5ItIEvuS0Y2qwMVEMpqiKTSpLx@dpg-ct2dhktsvqrc73dsn8c0-a.oregon-postgres.render.com/projects_db_31e4'
-    DJANGO_SUPERUSER_EMAIL='alwglass@gmail.com'
-    DJANGO_SUPERUSER_PASSWORD='Holly0427'
-    DJANGO_SUPERUSER_USERNAME='alwglass'
+    DJANGO_SUPERUSER_EMAIL= [email]
+    DJANGO_SUPERUSER_PASSWORD= [password]
+    DJANGO_SUPERUSER_USERNAME= [username]
     RENDER_HOSTNAME='ucdpa-django-project.onrender.com'
     SECRET_KEY='d4e5320356f82176a7d1b71cc44ec33a'
     # DATABASE_URL='postgresql://alwglass:wa050J5ItIEvuS0Y2qwMVEMpqiKTSpLx@dpg-ct2dhktsvqrc73dsn8c0-a.oregon-postgres.render.com/projects_db_31e4'
