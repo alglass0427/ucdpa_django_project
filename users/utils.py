@@ -23,7 +23,7 @@ def searchProfiles(request):
         Q(short_intro__icontains = search_query)|
         Q(bio__icontains = search_query)|
         Q(skill__in=skills)
-        ) ##__icontains is is not case sensitive -->> BEFORE THE __icontains the filed vlaue from the table is entered  -  in this case "name"
+        ) ##__icontains is not case sensitive -->> BEFORE THE __icontains the filed vlaue from the table is entered  -  in this case "name"
     print("Profiles matched:", profiles)
     print("Skills matched:", skills)    
     return profiles , search_query
