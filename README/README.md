@@ -51,6 +51,10 @@ Install all required Python packages using requirements.txt:
 
 Create a .env file in the root directory of the project and add the following environment variables:
 
+NOTE : DEBUG is set to false  - Changes may be required if Cloudinary is not used as storage
+
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 makefile
 
     DEBUG='FALSE'
