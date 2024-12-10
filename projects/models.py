@@ -21,7 +21,7 @@ class Project(models.Model):
     featured_image =  models.ImageField(null=True, blank=True, 
                                         default="https://res.cloudinary.com/dw32qih2n/image/upload/v1733065323/default_da6aid.jpg"
                                         # default="default.jpg"
-                                        
+                                                    
                                         )
     demo_link = models.CharField(max_length=2000,null=True,blank=True)
     source_link = models.CharField(max_length=2000,null=True,blank=True)
