@@ -130,19 +130,18 @@ WSGI_APPLICATION = 'schoolConnect.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-###RENDER
-# DATABASES = {"default": dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")}  # Loads connection string from DATABASE_URL
+
 
 
 ###ENV
 # DATABASES = {
 #     'default': env.db()  # Assumes DATABASE_URL is set in the `.env`
 # }
-# DATABASES = {"default": dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")}  # Loads connection string from DATABASE_URL
 
-DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-}
+###RENDER
+DATABASES = {"default": dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")}  # Loads connection string from DATABASE_URL
+
+
 
 # DATABASES = {
 #     'default': {
